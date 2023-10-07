@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Kanit', sans-serif; /* Use the Kanit font */
+            background-color: #FF8080; 
+        }
+       
+        .header-text {
+            color: #CDFAD5; /* Header text color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4 header-text">Jobs for Developers</h1>
+        <form method="POST" action='/' class="mb-4">
+            <div class="form-group">
+                <label for="keywords" class='font-italic text-white fw-6'>Enter Keywords (e.g., python, java):</label>
+                <input type="text" name="keyword" class="form-control" id="keywords" required>
+                <label for="location" class='font-italic text-white fw-6'>Enter City (e.g., Bengaluru, Hyderabad):</label>
+                <input type="text" name="location" class="form-control" id="location" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <div class="job-listings">
+            <h2 class='font-monospace header-text fw-4 font-bold'>Jobs for {{ keyword }} Developer in {{ location }}</h2>
+            {% for job in jobs %}
+            <div class="card mb-3 job-card">
+                <div class="card-body">
+                    <h5 class="card-title fw-3 lead font-weight-bold" style='color:#0802A3'>{{ job['comp_name'] }}</h5>
+                    <p class="card-text"><strong>Skills Required:</strong> {{ job['skills'] }}</p>
+                    <p class="card-text"><strong>City:</strong> {{ job['location'] }}</p>
+                    <p class="card-text"><strong>Job Description:</strong> {{ job['job_desc'] }}</p>
+                    <!-- Bootstrap-styled button -->
+                    <a href="{{ job['link'] }}" class="btn btn-danger job-card-link">More info</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
